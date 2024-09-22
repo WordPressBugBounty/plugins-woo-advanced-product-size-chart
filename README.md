@@ -1,0 +1,1 @@
+# plugins-woo-advanced-product-size-chart
