@@ -490,7 +490,7 @@ function scfw_size_chart_get_primary_chart_image_data_by_chart_id(  $size_chart_
  * @return string default image path.
  */
 function scfw_size_chart_default_chart_image() {
-    return plugins_url( 'admin/images/chart-img-placeholder.jpg', dirname( __FILE__ ) );
+    return esc_url( SCFW_PLUGIN_URL . 'admin/images/chart-img-placeholder.jpg' );
 }
 
 /**

@@ -34,7 +34,6 @@ admin_url( 'admin.php?page=size-chart-setting-page' );
 wp_nonce_field( "size_chart_page" );
 $get_page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS );
 if ( 'edit.php' === $pagenow && 'size-chart-setting-page' === $get_page ) {
-    $available_in_pro_text = __( '(Available in Pro Version) ', 'size-chart-for-woocommerce' );
     $plugin_pro_class = ' size-chart-disable';
     $is_disable = true;
     $size_chart_get_table_head_color = '';
@@ -58,7 +57,7 @@ if ( 'edit.php' === $pagenow && 'size-chart-setting-page' === $get_page ) {
     esc_html_e( 'General Settings', 'size-chart-for-woocommerce' );
     ?>
                                             <?php 
-    echo esc_html( $available_in_pro_text );
+    echo ( $is_disable === true ? wp_kses_post( '<span class="scfw-pro-feature">🔒</span>' ) : '' );
     ?>
                                         </legend>
                                         <div class="setting-description">
@@ -67,7 +66,7 @@ if ( 'edit.php' === $pagenow && 'size-chart-setting-page' === $get_page ) {
     printf(
         "%s <a href='%s' target='_blank'>%s</a>",
         esc_html__( 'With this setting you can configure size chart table style like table head font color, table row color, table head background color etc. Note: (For this setting you will have to select custom style from particular size chart.', 'size-chart-for-woocommerce' ),
-        esc_url( plugins_url( 'images/thedotstore-images/screenshots/custom-style-option.png', dirname( __FILE__ ) ) ),
+        esc_url( SCFW_PLUGIN_URL . 'admin/images/thedotstore-images/screenshots/custom-style-option.png' ),
         esc_html__( 'Check Screenshot', 'size-chart-for-woocommerce' )
     );
     ?>
@@ -238,7 +237,7 @@ if ( 'edit.php' === $pagenow && 'size-chart-setting-page' === $get_page ) {
     esc_html_e( 'Pop Up Settings', 'size-chart-for-woocommerce' );
     ?>
                                             <?php 
-    echo esc_html( $available_in_pro_text );
+    echo ( $is_disable === true ? wp_kses_post( '<span class="scfw-pro-feature">🔒</span>' ) : '' );
     ?>
                                         </legend>
                                         <div class="setting-description">
@@ -361,7 +360,7 @@ if ( 'edit.php' === $pagenow && 'size-chart-setting-page' === $get_page ) {
     esc_html_e( 'Size Chart User Permissions', 'size-chart-for-woocommerce' );
     ?>
                                             <?php 
-    echo esc_html( $available_in_pro_text );
+    echo ( $is_disable === true ? wp_kses_post( '<span class="scfw-pro-feature">🔒</span>' ) : '' );
     ?>
                                         </legend>
                                         <div class="setting-description">
@@ -420,7 +419,7 @@ if ( 'edit.php' === $pagenow && 'size-chart-setting-page' === $get_page ) {
     esc_html_e( 'Custom CSS', 'size-chart-for-woocommerce' );
     ?>
                                             <?php 
-    echo esc_html( $available_in_pro_text );
+    echo ( $is_disable === true ? wp_kses_post( '<span class="scfw-pro-feature">🔒</span>' ) : '' );
     ?>
                                         </legend>
                                         <div class="setting-description">
@@ -451,6 +450,9 @@ table#size-chart tr th, table#size-chart tr td{}' );
                                         </table>
                                     </fieldset>
                                     <?php 
+    wp_nonce_field( 'size_chart_gb_settings_action', 'size_chart_gb_settings_nonce' );
+    ?>
+                                    <?php 
     submit_button( esc_attr__( 'Save Changes', 'size-chart-for-woocommerce' ), 'primary', 'size_chart_submit' );
     ?>
                                 </div>
@@ -464,6 +466,8 @@ table#size-chart tr th, table#size-chart tr td{}' );
         </table>
     </div>
 </div>
-
-
+</div>
+</div>
+</div>
+</div>
 

@@ -17,53 +17,30 @@ if ( file_exists( plugin_dir_path( __FILE__ ) . $file_dir_path ) ) {
 }
 ?>
     <div class="thedotstore-main-table res-cl">
-        <h2><?php esc_html_e( 'Getting Started', 'size-chart-for-woocommerce' ); ?></h2>
-        <table class="table-outer">
-            <tbody>
-            <tr>
-                <td class="fr-2">
-                    <h4><strong><?php esc_html_e( 'Default Size Chart Template:', 'size-chart-for-woocommerce' ); ?></strong></h4>
-                    <p class="block textgetting"><?php esc_html_e( 'Product Size Charts for WooCommerce plugin provides a pre-designed size chart template that you can easily apply to your products or categories, saving you time and effort.', 'size-chart-for-woocommerce' ); ?></p>
-                    <h4><strong><?php esc_html_e( 'Create Your Own Size Guide:', 'size-chart-for-woocommerce' ); ?></strong></h4>
-                    <p class="block textgetting"><?php esc_html_e( 'With this plugin, you have the flexibility to customize or clone the default size chart and create your own size guide tailored to your unique needs and products.', 'size-chart-for-woocommerce' ); ?></p>
-                    <h4><strong><?php esc_html_e( 'Comprehensive Display:', 'size-chart-for-woocommerce' ); ?></strong></h4>
-                    <p class="block textgetting"><?php esc_html_e( 'By utilizing this plugin, you can ensure that customers have a clear understanding of your products\' sizing information, reducing the need for unnecessary inquiries and improving the buying experience.', 'size-chart-for-woocommerce' ); ?></p>
-                    <h4><strong><?php esc_html_e( 'Size Chart Customization and Management:', 'size-chart-for-woocommerce' ); ?></strong></h4>
-                    <p class="block textgetting">
-						<?php esc_html_e( 'This plugin offers the convenience of assigning ready-to-use default size chart templates to your WooCommerce products, as well as the ability to create custom size charts. You can clone existing templates or design your own size charts and assign them to specific products or categories, providing comprehensive size information to your customers.', 'size-chart-for-woocommerce' ); ?>
-                    </p>
-                    <p class="block textgetting">
-						<?php esc_html_e( 'You can edit any of the size charts available in the plugin, preview or clone them.', 'size-chart-for-woocommerce' ); ?>
-                        <span class="gettingstarted">
-                            <img src="<?php echo esc_url( plugin_dir_url( dirname( __FILE__ ) ) . 'images/thedotstore-images/screenshots/Getting_Started_01.png' ); ?>" alt="<?php esc_attr_e( 'Getting_Started_01', 'size-chart-for-woocommerce' ); ?>">
-                        </span>
-                    </p>
-                    <p class="block textgetting">
-						<?php esc_html_e( 'For each size chart, you can add label, chart image for which you want the chart to appear, chart position (modal popup/additional tab on product page) and table style.', 'size-chart-for-woocommerce' ); ?>
-                        <span class="gettingstarted">
-                            <img src="<?php echo esc_url( plugin_dir_url( dirname( __FILE__ ) ) . 'images/thedotstore-images/screenshots/Getting_Started_02.png' ); ?>" alt="<?php esc_attr_e( 'Getting_Started_02', 'size-chart-for-woocommerce' ); ?>">
-                        </span>
-                        <span class="gettingstarted">
-                            <img src="<?php echo esc_url( plugin_dir_url( dirname( __FILE__ ) ) . 'images/thedotstore-images/screenshots/Getting_Started_03.png' ); ?>" alt="<?php esc_attr_e( 'Getting_Started_03', 'size-chart-for-woocommerce' ); ?>">
-                        </span>
-                    </p>
-                    <p class="block textgetting">
-						<?php esc_html_e( 'For each size chart, you can create your custom chart table (with as many rows and columns you would like to include)', 'size-chart-for-woocommerce' ); ?>
-                        <span class="gettingstarted">
-                            <img src="<?php echo esc_url( plugin_dir_url( dirname( __FILE__ ) ) . 'images/thedotstore-images/screenshots/Getting_Started_04.png' ); ?>" alt="<?php esc_attr_e( 'Getting_Started_04', 'size-chart-for-woocommerce' ); ?>">
-                        </span>
-                    </p>
-                    <p class="block textgetting">
-						<?php esc_html_e( 'Plugin settings offers the option to change the label of size chart tab and modal popup, which is displayed in product page.)', 'size-chart-for-woocommerce' ); ?>
-                        <span class="gettingstarted">
-                            <img src="<?php echo esc_url( plugin_dir_url( dirname( __FILE__ ) ) . 'images/thedotstore-images/screenshots/Getting_Started_05.png' ); ?>" alt="<?php esc_attr_e( 'Getting_Started_05', 'size-chart-for-woocommerce' ); ?>">
-                        </span>
-                    </p>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="dots-getting-started-main">
+            <div class="getting-started-content">
+                <span><?php esc_html_e( 'How to Get Started', 'size-chart-for-woocommerce' ); ?></span>
+                <h3><?php esc_html_e( 'Welcome to Product Size Charts Plugin', 'size-chart-for-woocommerce' ); ?></h3>
+                <p><?php esc_html_e( 'Thank you for choosing our top-rated WooCommerce Product Size Charts plugin. Our user-friendly interface makes it easy to create product size charts.', 'size-chart-for-woocommerce' ); ?></p>
+                <p>
+                    <?php 
+                    echo sprintf(
+                        esc_html__('To help you get started, watch the quick tour video on the right. For more help, explore our help documents or visit our %s for detailed video tutorials.', 'size-chart-for-woocommerce'),
+                        '<a href="' . esc_url('https://www.youtube.com/@DotStore16?sub_confirmation=1') . '" target="_blank">' . esc_html__('YouTube channel', 'size-chart-for-woocommerce') . '</a>',
+                    );
+                    ?>
+                </p>
+                <div class="getting-started-actions">
+                    <a href="<?php echo esc_url(add_query_arg(array('post_type' => 'size-chart'), admin_url('edit.php'))); ?>" class="quick-start"><?php esc_html_e( 'Manage Size Charts', 'size-chart-for-woocommerce' ); ?><span class="dashicons dashicons-arrow-right-alt"></span></a>
+                    <a href="https://docs.thedotstore.com/article/246-getting-started-with-size-charts-plugin" target="_blank" class="setup-guide"><span class="dashicons dashicons-book-alt"></span><?php esc_html_e( 'Read the Setup Guide', 'size-chart-for-woocommerce' ); ?></a>
+                </div>
+            </div>
+            <div class="getting-started-video">
+                <iframe width="960" height="600" src="<?php echo esc_url('https://www.youtube.com/embed/oqYqsLYF4Cs'); ?>" title="<?php esc_attr_e( 'Plugin Tour', 'size-chart-for-woocommerce' ); ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
     </div>
+</div>
 </div>
 </div>
 </div>

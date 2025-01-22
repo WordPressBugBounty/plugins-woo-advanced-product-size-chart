@@ -24,13 +24,18 @@ $size_cart_cat_id = scfw_size_chart_get_categories( $post->ID );
 		<div class="field-item">
 			<select name="chart-categories[]" id="chart-categories" multiple="multiple">
 				<?php
-				$size_cart_term = get_terms( 'product_cat', array('hide_empty' => false) );
+				$size_cart_term = get_terms(
+					array(
+						'taxonomy'   => 'product_cat',
+						'hide_empty' => false,
+					)
+				);
 				if ( ! empty( $size_cart_term ) ) {
 					foreach ( $size_cart_term as $size_cart_cat ) {
 						printf(
 							"<option value='%s' %s>%s</option>",
 							esc_attr( $size_cart_cat->term_id ),
-							selected( true, in_array( $size_cart_cat->term_id, $size_cart_cat_id, true ) ),
+							in_array( $size_cart_cat->term_id, $size_cart_cat_id, true ) ? 'selected="selected"' : '',
 							esc_html( $size_cart_cat->name )
 						);
 					}

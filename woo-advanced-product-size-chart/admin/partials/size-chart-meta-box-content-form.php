@@ -79,13 +79,10 @@ esc_html_e( 'Select if the chart will display as a popup or as a additional tab'
         <div class="field-item">
             <select name="position" id="position">
             <?php 
-$valid_size_charts = get_option( 'scfw_allowed_post', array() );
-$valid_size_charts = array_map( 'intval', $valid_size_charts );
-if ( in_array( (int) $size_cart_post_id, $valid_size_charts, true ) ) {
-    echo '<option value="tab"' . selected( $chart_position, 'tab', false ) . '>' . esc_html__( 'Additional Tab', 'size-chart-for-woocommerce' ) . '</option>';
+echo '<option value="tab"' . selected( $chart_position, 'tab', false ) . '>' . esc_html__( 'Additional Tab', 'size-chart-for-woocommerce' ) . '</option>';
+if ( !empty( selected( $chart_position, 'popup', false ) ) ) {
     echo '<option value="popup"' . selected( $chart_position, 'popup', false ) . '>' . esc_html__( 'Modal Pop Up', 'size-chart-for-woocommerce' ) . '</option>';
 } else {
-    echo '<option value="tab"' . selected( $chart_position, 'tab', false ) . '>' . esc_html__( 'Additional Tab', 'size-chart-for-woocommerce' ) . '</option>';
     echo '<option value="pro-popup">' . esc_html__( '🔒 Modal Pop Up', 'size-chart-for-woocommerce' ) . '</option>';
 }
 ?>
@@ -503,7 +500,7 @@ $multitable_note = sprintf(
     '<strong>%s</strong> - %s<a href=%s target="_blank">%s</a>%s',
     esc_html__( 'Multitable', 'size-chart-for-woocommerce' ),
     esc_html__( 'Use three asterisks (***) for section titles and two asterisks (**) for new tables. ', 'size-chart-for-woocommerce' ),
-    esc_url( plugins_url( 'images/size-chart-multitable.png', dirname( __FILE__ ) ) ),
+    esc_url( SCFW_PLUGIN_URL . 'admin/images/size-chart-multitable.png' ),
     esc_html__( 'Click here', 'size-chart-for-woocommerce' ),
     esc_html__( ' for more info.', 'size-chart-for-woocommerce' )
 );

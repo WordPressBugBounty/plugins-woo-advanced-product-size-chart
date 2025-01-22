@@ -112,7 +112,7 @@ ul#size-chart-checklist-all li{display:-webkit-box;display:-ms-flexbox;display:f
 .dots-settings-inner-main #size-chart-meta-fields .field.enable{display:flex;}
 #wpfooter{position:absolute!important;}
 .disabled{opacity:0.4;}
-.chart_note{background-color:#eaea16;padding:5px;border-radius:5px;margin-top:10px;}
+.chart_note{background-color: #eaea16;padding: 5px;border-radius: 5px;margin-top: 10px;display: inline-block;width: 100%;}
 
 @media only screen and (max-width:1450px){
     #dotsstoremain header .dots-header-right .logo-detail{width:50%;}

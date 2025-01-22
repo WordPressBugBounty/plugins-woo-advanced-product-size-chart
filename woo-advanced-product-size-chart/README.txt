@@ -1,12 +1,12 @@
 === Product Size Charts Plugin for WooCommerce ===
 Contributors: dots
-Donate link: 
-Tags: popup,chart,size guide, size table, table size
+Donate link: https://www.thedotstore.com/
+Tags: product size chart, size chart, size guide, size table, product size guide
 Requires at least: 4.0
 Requires PHP: 7.2
-Tested up to: 6.5.2
-Stable tag: 2.4.4
-WC tested up to: 8.7.0
+Tested up to: 6.7.1
+Stable tag: 2.4.5
+WC tested up to: 9.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ Struggling with high return rates due to sizing issues in your WooCommerce store
 
 Help your customers <strong>find their perfect fit on the first try.</strong> This plugin lets you easily create and display comprehensive size charts, making shopping smooth and ensuring satisfaction with every purchase.
 
-[youtube https://www.youtube.com/watch?v=0dmwjIY9S8U]
+[youtube https://www.youtube.com/watch?v=oqYqsLYF4Cs]
 
 
 <strong>Plugin Demo:<strong> <a href ="https://pluginsdemo.thedotstore.com/woocommerce-advanced-product-size-charts/" target="_blank">View Demo</a>
@@ -183,7 +183,7 @@ Upgrade the premium plugin version to get all the advanced features.
 
 = What range of WordPress versions is compatible with this plugin? =
 
-The WooCommerce Advanced Product Size Charts plugin can be used with WordPress versions from 4.0 to 6.5.*, ensuring compatibility with a broad spectrum of WordPress installations.
+The WooCommerce Advanced Product Size Charts plugin is compatible with WordPress versions 4.0 and above, ensuring compatibility with a broad spectrum of WordPress installations.
 
 = Which versions of WooCommerce does this plugin support? =
 
@@ -227,6 +227,7 @@ Currently, our plugin focuses on in-dashboard creation and assignment of size ch
 
 = Is the plugin mobile-responsive? =
 Indeed, size charts created with our plugin are fully responsive, ensuring that customers have a perfect viewing experience on any device.
+
 = Does this plugin have multi-language support? =
 The WooCommerce Advanced Product Size Charts plugin is ready for translation, which means you can create size charts in the language of your choice to cater to a global audience.
 
@@ -248,9 +249,18 @@ Automatic updates should work great for you.  As always, though, we recommend ba
 9.
 
 == Changelog ==
+= 2.4.5 =
+* [Bug Fix] Minor fixes to remove default size chart when use shortcode on product page
+* [Bug Fix] Minor fixes related to the security vulnerability
+* [Bug Fix] Minor fixes related to the tabbed size chart
+* [Enhancement] Changed free plugin "Dashboard" to "Get Premium"
+* [Enhancement] Plugin UI enhancement
+* [Enhancement] Compatible with WooCommerce 9.6.x
+* [Enhancement] Compatible with WordPress 6.7.x
+
 = 2.4.4 =
 * [Enhancement] Plugin UI enhancement
-* [Enhancement] Compatible with WooCommerce 8.7.x
+* [Enhancement] Compatible with WooCommerce 8.8.x
 * [Enhancement] Compatible with WordPress 6.5.x
 
 = 2.4.3.2 =

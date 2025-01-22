@@ -91,11 +91,12 @@ class SCFW_Size_Chart_For_Woocommerce {
         $this->scfw_define_admin_hooks();
         $this->scfw_define_public_hooks();
         $prefix = ( is_network_admin() ? 'network_admin_' : '' );
+        add_filter( "{$prefix}plugin_action_links_" . plugin_dir_path( plugin_basename( dirname( __FILE__ ) ) ) . 'size-chart-for-woocommerce.php', array($this, 'scfw_plugin_action_links_callback'), 10 );
         add_filter(
-            "{$prefix}plugin_action_links_" . plugin_dir_path( plugin_basename( dirname( __FILE__ ) ) ) . 'size-chart-for-woocommerce.php',
-            array($this, 'scfw_plugin_action_links_callback'),
-            10,
-            4
+            'plugin_row_meta',
+            array($this, 'scfw_plugin_row_meta_action_links'),
+            20,
+            3
         );
     }
 
@@ -180,8 +181,15 @@ class SCFW_Size_Chart_For_Woocommerce {
         $this->loader->add_filter( 'parse_query', $plugin_admin, 'scfw_size_chart_filter_default_template_query_callback' );
         $this->loader->add_action( 'trashed_post', $plugin_admin, 'scfw_size_chart_selected_chart_delete_callback' );
         $this->loader->add_action( 'admin_notices', $plugin_admin, 'scfw_size_chart_admin_notice_review_callback' );
+        $this->loader->add_action(
+            'admin_footer',
+            $plugin_admin,
+            'scfw_size_chart_posts_close_div',
+            1
+        );
         $this->loader->add_action( 'wp_ajax_scfw_plugin_setup_wizard_submit', $plugin_admin, 'scfw_plugin_setup_wizard_submit' );
         $this->loader->add_action( 'admin_init', $plugin_admin, 'scfw_send_wizard_data_after_plugin_activation' );
+        $this->loader->add_filter( 'admin_footer_text', $plugin_admin, 'scfw_admin_footer_review' );
         $this->loader->add_action( 'admin_footer', $plugin_admin, 'scfw_upgrade_to_pro_limit' );
         $this->loader->add_action( 'load-post-new.php', $plugin_admin, 'restrict_add_new_size_chart_post' );
     }
@@ -212,11 +220,26 @@ class SCFW_Size_Chart_For_Woocommerce {
     public function scfw_plugin_action_links_callback( $actions ) {
         $custom_actions = array(
             'configure' => sprintf( '<a href="%s">%s</a>', esc_url( admin_url( 'edit.php?post_type=size-chart&page=size-chart-setting-page' ) ), __( 'Settings', 'size-chart-for-woocommerce' ) ),
-            'docs'      => sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( plugin_dir_url( dirname( __FILE__ ) ) . 'help Doc/Size Chart For WooCommerce plugin - help document.pdf' ), __( 'Docs', 'size-chart-for-woocommerce' ) ),
+            'docs'      => sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( 'https://docs.thedotstore.com/collection/233-product-size-charts' ), __( 'Docs', 'size-chart-for-woocommerce' ) ),
             'support'   => sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( 'https://www.thedotstore.com/support/' ), __( 'Support', 'size-chart-for-woocommerce' ) ),
         );
         // add the links to the front of the actions list
         return array_merge( $custom_actions, $actions );
+    }
+
+    /**
+     * Add review stars in plugin row meta
+     *
+     * @since 1.0.0
+     */
+    public function scfw_plugin_row_meta_action_links( $plugin_meta, $plugin_file, $plugin_data ) {
+        if ( isset( $plugin_data['TextDomain'] ) && $plugin_data['TextDomain'] !== 'size-chart-for-woocommerce' ) {
+            return $plugin_meta;
+        }
+        $url = '';
+        $url = esc_url( 'https://wordpress.org/plugins/woo-advanced-product-size-chart/#reviews' );
+        $plugin_meta[] = sprintf( '<a href="%s" target="_blank" style="color:#f5bb00;">%s</a>', $url, esc_html( '★★★★★' ) );
+        return $plugin_meta;
     }
 
     /**

@@ -66,11 +66,13 @@ div#size-chart-setting-fields legend{background-color:#e7e7e7;border:1px solid #
 .md-size-chart-modal-content{margin:0;position:fixed;z-index:199999;top:0;right:0;bottom:0;left:0;padding:50px}
 div#md-size-chart-modal .remodal-close{font-weight:600}
 div#md-size-chart-modal .remodal-close:hover,div#md-size-chart-modal .remodal-close:focus{color:#fff;background-color:#d85050;border-color:#d85050}
-.md-size-chart-modal-body{-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);color:#2b2e38;background:#fff;position:relative;outline:none;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;-ms-text-size-adjust:100%;text-size-adjust:100%;-webkit-animation-name:animatetop;-webkit-animation-duration:0.4s;animation-name:animatetop;animation-duration:0.4s;margin:0 auto;z-index:111111;overflow:hidden;max-height:100%;border-radius:5px;height:100%;padding-bottom:90px;}
+.md-size-chart-modal-body{width:100%;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);color:#2b2e38;background:#fff;position:relative;outline:none;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;-ms-text-size-adjust:100%;text-size-adjust:100%;-webkit-animation-name:animatetop;-webkit-animation-duration:0.4s;animation-name:animatetop;animation-duration:0.4s;margin:0 auto;z-index:111111;overflow:hidden;max-height:100%;border-radius:5px;height:100%;padding-bottom:90px;}
+.md-size-chart-modal-body, .md-size-chart-modal-body *{-webkit-box-sizing:border-box;box-sizing:border-box;}
 .md-size-chart-hide .md-size-chart-modal-body{-webkit-animation:animateend ease 0.5s forwards;-webkit-animation-duration:0.4s;animation:animateend ease 0.5s forwards;animation-duration:0.4s;}
 div.md-size-chart-overlay{position:fixed;z-index:10000;top:-5000px;right:-5000px;bottom:-5000px;left:-5000px;background-color:rgb(0 0 0 / 70%);-webkit-animation-name:animatetop;-webkit-animation-duration:0.4s;animation-name:animatetop;animation-duration:0.4s;}
 .md-size-chart-hide .md-size-chart-overlay{-webkit-animation:animateend ease 0.5s forwards;-webkit-animation-duration:0.4s;animation:animateend ease 0.5s forwards;animation-duration:0.4s;}
 .chart-container{padding:20px;height:100%;overflow-y:auto;}
+.scfw_tab_style .chart-container{height:auto;}
 .chart-container img{max-width:100%;height:auto;}
 .md-size-chart-subtitle{font-size:16px;}
 div#md-size-chart-modal .chart-table{float:none;margin-top:15px;overflow-x:auto;width:100%}
@@ -90,7 +92,6 @@ nav.pagination ul.page-numbers li.button{margin:0 1px}
 .size-chart-accordion-section-content div#tabs-panel-posttype-size-chart-search .quick-search-wrap .spinner{display:none;margin:5px;float:right}
 div#size-chart-meta-fields .field-item span.select2.select2-container input{height:inherit;line-height:inherit;-webkit-box-shadow:none;box-shadow:none;border:none;width:100%!important;}
 .size-chart-accordion-section-content div#tabs-panel-posttype-size-chart-search .quick-search-wrap .spinner.is-active{display:block}
-.size-chart-disable legend{color:#ff0000}
 .size-chart-disable table.form-table label{cursor:default;color:#808080}
 div#size-chart-meta-fields option:disabled{color:red;background:#f1f1f1}
 
@@ -140,10 +141,11 @@ table.inputtable a.icon-button{border-radius:5px;width:20px;height:20px;line-hei
 .scfw_size-chart-details-tab{display:-webkit-box;display:-ms-flexbox;display:flex;width:100%;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;border-bottom:1px solid lightgrey;position:relative;}
 .scfw_size-chart-details-tab span{width:100%;max-width:220px;padding:10px 10px 7px 10px;cursor:pointer;text-align:center;border-bottom:3px solid transparent;outline:none;-webkit-box-shadow:none;box-shadow:none;color:#000;font-size:16px;line-height:25px;}
 .scfw_size-chart-details-tab span.active-tab{border-bottom-color:#000;font-weight:600;}
-.scfw_size-chart-details-tab + .chart-container{display:-webkit-box;display:-ms-flexbox;display:flex;width:100%;-ms-flex-wrap:wrap;flex-wrap:wrap;}
+.scfw_size-chart-details-tab + .chart-container{display:-webkit-box;display:-ms-flexbox;display:flex;width:100%;-ms-flex-wrap:wrap;flex-wrap:wrap;height:auto;}
 .scfw_size-chart-details-tab + .chart-container .chart-content.scfw-tab-content{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1;}
-.scfw_size-chart-details-tab + .chart-container .scfw-tab-content{display:none;}
+.scfw_size-chart-details-tab + .chart-container .scfw-tab-content, .scfw_size-chart-details-tab + .chart-container .chart_note{display:none;}
 .scfw_size-chart-details-tab + .chart-container .scfw-tab-content.active-tab{display:inline-block;}
+.scfw_size-chart-details-tab + .chart-container .chart-table.active-tab + .chart_note{display:inline-block;}
 .scfw_size-chart-details-tab + .chart-container .scfw-tab-content{-webkit-animation:fadeEffext 0.8s;animation:fadeEffext 0.8s}
 .scfw_size-chart-details-tab .scfw_tab_underline{display:inline-block;width:100%;max-width:220px;height:3px;background-color:#000;position:absolute;z-index:1200;bottom:0;left:0;-webkit-transition:all .3s ease;-o-transition:all .3s ease;transition:all .3s ease;visibility:hidden;}
 @-webkit-keyframes fadeEffext{
@@ -170,6 +172,10 @@ table.inputtable a.icon-button{border-radius:5px;width:20px;height:20px;line-hei
 .scfw-size-chart-popup-right.md-size-chart-show .md-size-chart-modal-content{right:0;transition:all .5s ease-out;}
 .scfw-size-chart-popup-right .md-size-chart-modal-body{box-shadow:0 0 15px rgb(0 0 0 / 25%);border-radius:0;animation:none;margin-right:0;}
 .scfw-size-chart-popup-right.md-size-chart-show .md-size-chart-overlay{display:block;}
+
+/* Upgrade to pro */
+.size-chart-disable legend{cursor:pointer;}
+.size-chart-disable .scfw-pro-feature{margin-left:3px;}
 
 /* Woocoomerce spinner custom code start */
 .blockUI.blockOverlay::before{height:1em;width:1em;display:block;position:absolute;top:50%;left:50%;margin-left:-0.5em;margin-top:-0.5em;content:"";-webkit-animation:spin 1s ease-in-out infinite;animation:spin 1s ease-in-out infinite;background:url(../images/loader.svg) center center;background-size:cover;line-height:1;text-align:center;font-size:2em;color:rgba(0,0,0,.75);}

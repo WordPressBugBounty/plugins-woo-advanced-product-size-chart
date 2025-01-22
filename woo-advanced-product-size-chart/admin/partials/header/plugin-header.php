@@ -21,9 +21,8 @@ $current_page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CH
 $get_current_screen = get_current_screen();
 $scfw_free_dashboard = ( isset( $current_page ) && 'scfw-upgrade-dashboard' === $current_page ? 'active' : '' );
 $scfw_rules_list = ( (isset( $get_current_screen ) || isset( $current_page )) && ('size-chart' === $get_current_screen->post_type && 'size-chart-setting-page' !== $current_page) ? 'active' : '' );
-$scfw_settings_menu = ( isset( $current_page ) && ('size-chart-import-export' === $current_page || 'size-chart-get-started' === $current_page || 'size-chart-information' === $current_page || 'size-chart-setting-page' === $current_page) || !(scfw_fs()->is__premium_only() && scfw_fs()->can_use_premium_code()) && 'size-chart-get-started-account' === $current_page ? 'active' : '' );
+$scfw_settings_menu = ( isset( $current_page ) && ('size-chart-import-export' === $current_page || 'size-chart-get-started' === $current_page || 'size-chart-setting-page' === $current_page) || !(scfw_fs()->is__premium_only() && scfw_fs()->can_use_premium_code()) && 'size-chart-get-started-account' === $current_page ? 'active' : '' );
 $scfw_get_started = ( isset( $current_page ) && 'size-chart-get-started' === $current_page ? 'active' : '' );
-$scfw_quick_info = ( isset( $current_page ) && 'size-chart-information' === $current_page ? 'active' : '' );
 $scfw_import_export = ( isset( $current_page ) && 'size-chart-import-export' === $current_page ? 'active' : '' );
 $scfw_global_settings = ( isset( $current_page ) && 'size-chart-setting-page' === $current_page ? 'active' : '' );
 $scfw_account_page = ( isset( $current_page ) && 'size-chart-get-started-account' === $current_page ? 'active' : '' );
@@ -36,6 +35,7 @@ $scfw_admin_object = new SCFW_Size_Chart_For_Woocommerce_Admin('', '', '');
         <?php 
 $scfw_admin_object->scfw_get_promotional_bar( $plugin_slug );
 ?>
+        <hr class="wp-header-end" />
         <div class="dotstore_plugin_page_loader"></div>
         <header class="dots-header">
             <div class="dots-plugin-details">
@@ -52,7 +52,9 @@ esc_attr_e( SCFW_PLUGIN_NAME, 'size-chart-for-woocommerce' );
 esc_html_e( $plugin_name, 'size-chart-for-woocommerce' );
 ?></div>
                     </div>
-                    <span class="version-label"><?php 
+                    <span class="version-label <?php 
+echo esc_attr( $plugin_slug );
+?>"><?php 
 esc_html_e( $version_label, 'size-chart-for-woocommerce' );
 ?></span>
                     <span class="version-number"><?php 
@@ -92,35 +94,19 @@ esc_html_e( 'Help', 'size-chart-for-woocommerce' );
                             <a class="dots-upgrade-btn" target="_blank" href="<?php 
 echo esc_url( $scfw_fs->get_upgrade_url() );
 ?>"><?php 
-esc_html_e( 'Upgrade', 'size-chart-for-woocommerce' );
+esc_html_e( 'Upgrade Now', 'size-chart-for-woocommerce' );
 ?></a>
                             <?php 
 ?>
                     </div>
                 </div>
             </div>
-            <div class="dots-menu-main">
-                <nav>
-                    <ul>
-                        <?php 
-if ( !(scfw_fs()->is__premium_only() && scfw_fs()->can_use_premium_code()) ) {
-    ?>
+            <div class="dots-bottom-menu-main">
+                <div class="dots-menu-main">
+                    <nav>
+                        <ul>
                             <li>
                                 <a class="dotstore_plugin <?php 
-    echo esc_attr( $scfw_free_dashboard );
-    ?>" href="<?php 
-    echo esc_url( add_query_arg( array(
-        'page' => 'scfw-upgrade-dashboard',
-    ), admin_url( 'admin.php' ) ) );
-    ?>"><?php 
-    esc_html_e( 'Dashboard', 'size-chart-for-woocommerce' );
-    ?></a>
-                            </li>
-                            <?php 
-}
-?>
-                        <li>
-                            <a class="dotstore_plugin <?php 
 echo esc_attr( $scfw_rules_list );
 ?>" href="<?php 
 echo esc_url( add_query_arg( array(
@@ -129,9 +115,9 @@ echo esc_url( add_query_arg( array(
 ?>"><?php 
 esc_html_e( 'Size Charts', 'size-chart-for-woocommerce' );
 ?></a>
-                        </li>
-                        <li>
-                            <a class="dotstore_plugin <?php 
+                            </li>
+                            <li>
+                                <a class="dotstore_plugin <?php 
 echo esc_attr( $scfw_settings_menu );
 ?>" href="<?php 
 echo esc_url( add_query_arg( array(
@@ -140,26 +126,56 @@ echo esc_url( add_query_arg( array(
 ?>"><?php 
 esc_html_e( 'Settings', 'size-chart-for-woocommerce' );
 ?></a>
-                        </li>
-                        <?php 
+                            </li>
+                            <?php 
 if ( scfw_fs()->is__premium_only() && scfw_fs()->can_use_premium_code() ) {
     ?>
-                            <li>
-                                <a class="dotstore_plugin <?php 
+                                <li>
+                                    <a class="dotstore_plugin <?php 
     echo esc_attr( $scfw_account_page );
     ?>" href="<?php 
     echo esc_url( $scfw_fs->get_account_url() );
     ?>"><?php 
     esc_html_e( 'License', 'size-chart-for-woocommerce' );
     ?></a>
-                            </li>
-                            <?php 
+                                </li>
+                                <?php 
+} else {
+    ?>
+                                <li>
+                                    <a class="dotstore_plugin dots_get_premium <?php 
+    echo esc_attr( $scfw_free_dashboard );
+    ?>" href="<?php 
+    echo esc_url( add_query_arg( array(
+        'page' => 'scfw-upgrade-dashboard',
+    ), admin_url( 'admin.php' ) ) );
+    ?>"><?php 
+    esc_html_e( 'Get Premium', 'size-chart-for-woocommerce' );
+    ?></a>
+                                </li>
+                                <?php 
 }
 ?>
-                    </ul>
-                </nav>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="dots-getting-started">
+                    <a href="<?php 
+echo esc_url( add_query_arg( array(
+    'page' => 'size-chart-get-started',
+), admin_url( 'admin.php' ) ) );
+?>" class="<?php 
+echo esc_attr( $scfw_get_started );
+?>"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M12 4.75a7.25 7.25 0 100 14.5 7.25 7.25 0 000-14.5zM3.25 12a8.75 8.75 0 1117.5 0 8.75 8.75 0 01-17.5 0zM12 8.75a1.5 1.5 0 01.167 2.99c-.465.052-.917.44-.917 1.01V14h1.5v-.845A3 3 0 109 10.25h1.5a1.5 1.5 0 011.5-1.5zM11.25 15v1.5h1.5V15h-1.5z" fill="#a0a0a0"></path></svg></a>
+                </div>
             </div>
         </header>
+        <!-- Upgrade to pro popup -->
+        <?php 
+if ( !(scfw_fs()->is__premium_only() && scfw_fs()->can_use_premium_code()) ) {
+    require_once SCFW_PLUGIN_DIR_PATH . 'admin/partials/dots-upgrade-popup.php';
+}
+?>
         <div class="dots-settings-inner-main">
             <div class="dots-settings-left-side">
                 <div class="dotstore-submenu-items" style="<?php 
@@ -175,50 +191,15 @@ echo esc_url( add_query_arg( array(
 ?>"><?php 
 esc_html_e( 'Global Settings', 'size-chart-for-woocommerce' );
 ?></a></li>
-                        <?php 
-?>
                         <li><a class="<?php 
-echo esc_attr( $scfw_get_started );
+echo esc_attr( $scfw_import_export );
 ?>" href="<?php 
 echo esc_url( add_query_arg( array(
-    'page' => 'size-chart-get-started',
+    'page' => 'size-chart-import-export',
 ), admin_url( 'admin.php' ) ) );
 ?>"><?php 
-esc_html_e( 'About', 'size-chart-for-woocommerce' );
-?></a></li>
-                        <li><a class="<?php 
-echo esc_attr( $scfw_quick_info );
-?>" href="<?php 
-echo esc_url( add_query_arg( array(
-    'page' => 'size-chart-information',
-), admin_url( 'admin.php' ) ) );
-?>"><?php 
-esc_html_e( 'Quick info', 'size-chart-for-woocommerce' );
-?></a></li>
-                        <?php 
-if ( !(scfw_fs()->is__premium_only() && scfw_fs()->can_use_premium_code()) ) {
-    $check_account_page_exist = menu_page_url( 'size-chart-get-started-account', false );
-    if ( isset( $check_account_page_exist ) && !empty( $check_account_page_exist ) ) {
-        ?>
-                                <li>
-                                    <a class="<?php 
-        echo esc_attr( $scfw_account_page );
-        ?>" href="<?php 
-        echo esc_url( $scfw_fs->get_account_url() );
-        ?>"><?php 
-        esc_html_e( 'Account', 'size-chart-for-woocommerce' );
-        ?></a>
-                                </li>
-                                <?php 
-    }
-}
-?>
-                        <li><a href="<?php 
-echo esc_url( 'https://www.thedotstore.com/plugins/' );
-?>" target="_blank"><?php 
-esc_html_e( 'Shop Plugins', 'size-chart-for-woocommerce' );
+esc_html_e( 'Import / Export', 'size-chart-for-woocommerce' );
 ?></a></li>
                     </ul>
                 </div>
-                <hr class="wp-header-end" />
                 

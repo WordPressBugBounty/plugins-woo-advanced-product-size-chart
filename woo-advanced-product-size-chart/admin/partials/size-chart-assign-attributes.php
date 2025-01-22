@@ -30,7 +30,12 @@ $chart_attributes = scfw_size_chart_get_attributes( $post->ID );
                             <optgroup label="<?php echo esc_attr( $attribute->attribute_label ); ?>">
                                 <?php
                                     // Get its value for currnt attribute
-                                    $attribute_values = get_terms("pa_" . $attribute->attribute_name, array('hide_empty' => false));
+                                    $attribute_values = get_terms(
+                                        array(
+                                            'taxonomy'   => "pa_" . $attribute->attribute_name,
+                                            'hide_empty' => false,
+                                        )
+                                    );
                                     if ( ! empty( $attribute_values ) ) {
                                         foreach ( $attribute_values as $value ) { ?>
                                             <option value="<?php echo esc_attr($value->term_id); ?>" <?php selected( true, in_array( $value->term_id, $chart_attributes, true ), true ); ?>>

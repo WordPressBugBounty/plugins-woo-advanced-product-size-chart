@@ -22,7 +22,7 @@ $activate_free_plugin = !empty($require_license) && 'false' === $require_license
 			<div class="ds-wizard-wrap">
 				<div class="ds-wizard-content">
 					<h3 class="cta-title"><?php echo esc_html__( 'Welcome! 🤗', 'size-chart-for-woocommerce' ); ?></h3>
-					<img class="ds-wizard-logo" src="<?php echo esc_url( plugin_dir_url( dirname( __FILE__, 2 ) ) . '/admin/images/thedotstore-images/product-size-chart-logo-128x128.png' ); ?>"/>
+					<img class="ds-wizard-logo" src="<?php echo esc_url( plugin_dir_url( dirname( __FILE__, 2 ) ) . 'admin/images/thedotstore-images/product-size-chart-logo-128x128.png' ); ?>"/>
 					<p><?php echo esc_html__( 'Optimize sales with customizable size charts for WooCommerce products, engaging visuals, and informed purchase decisions!', 'size-chart-for-woocommerce' ); ?></p>
 				</div>
 				<div class="ds-wizard-next-step">

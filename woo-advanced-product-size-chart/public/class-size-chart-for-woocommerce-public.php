@@ -442,7 +442,20 @@ class SCFW_Size_Chart_For_Woocommerce_Public {
      * @since 1.0.0
      */
     public function scfw_size_chart_popup_button_callback() {
-        global $post;
+        global $post, $scfw_size_chart_rendered;
+        if ( empty( $post ) ) {
+            return;
+        }
+        $hide_if_shortcode_exist = apply_filters( 'scfw_size_chart_hide_if_shortcode_exist', true );
+        if ( $hide_if_shortcode_exist ) {
+            // Check if the shortcode exists in the content.
+            $has_shortcode_in_content = has_shortcode( $post->post_content, 'scfw_product_size_chart' );
+            $has_shortcode_in_excerpt = has_shortcode( $post->post_excerpt, 'scfw_product_size_chart' );
+            if ( $has_shortcode_in_content || $has_shortcode_in_excerpt || !empty( $scfw_size_chart_rendered ) ) {
+                // Do not display the button if shortcode is used.
+                return;
+            }
+        }
         $dup_id = array();
         $prod_id = scfw_size_chart_get_product( $post->ID );
         $prod_id = ( is_array( $prod_id ) ? $prod_id : [$prod_id] );
@@ -644,6 +657,7 @@ class SCFW_Size_Chart_For_Woocommerce_Public {
                     }
                     $size_chart_get_button_class = '';
                     $popup_position = 'center';
+                    $popup_type = '';
                     $chart_popup_type = scfw_size_chart_get_popup_type_by_chart_id( $chart_id );
                     if ( isset( $chart_popup_type ) && !empty( $chart_popup_type ) && 'global' !== $chart_popup_type ) {
                         $popup_type = $chart_popup_type;
