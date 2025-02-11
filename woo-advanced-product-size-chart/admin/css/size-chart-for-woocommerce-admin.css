@@ -72,7 +72,6 @@ div#md-size-chart-modal .remodal-close:hover,div#md-size-chart-modal .remodal-cl
 div.md-size-chart-overlay{position:fixed;z-index:10000;top:-5000px;right:-5000px;bottom:-5000px;left:-5000px;background-color:rgb(0 0 0 / 70%);-webkit-animation-name:animatetop;-webkit-animation-duration:0.4s;animation-name:animatetop;animation-duration:0.4s;}
 .md-size-chart-hide .md-size-chart-overlay{-webkit-animation:animateend ease 0.5s forwards;-webkit-animation-duration:0.4s;animation:animateend ease 0.5s forwards;animation-duration:0.4s;}
 .chart-container{padding:20px;height:100%;overflow-y:auto;}
-.scfw_tab_style .chart-container{height:auto;}
 .chart-container img{max-width:100%;height:auto;}
 .md-size-chart-subtitle{font-size:16px;}
 div#md-size-chart-modal .chart-table{float:none;margin-top:15px;overflow-x:auto;width:100%}
@@ -141,7 +140,7 @@ table.inputtable a.icon-button{border-radius:5px;width:20px;height:20px;line-hei
 .scfw_size-chart-details-tab{display:-webkit-box;display:-ms-flexbox;display:flex;width:100%;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;border-bottom:1px solid lightgrey;position:relative;}
 .scfw_size-chart-details-tab span{width:100%;max-width:220px;padding:10px 10px 7px 10px;cursor:pointer;text-align:center;border-bottom:3px solid transparent;outline:none;-webkit-box-shadow:none;box-shadow:none;color:#000;font-size:16px;line-height:25px;}
 .scfw_size-chart-details-tab span.active-tab{border-bottom-color:#000;font-weight:600;}
-.scfw_size-chart-details-tab + .chart-container{display:-webkit-box;display:-ms-flexbox;display:flex;width:100%;-ms-flex-wrap:wrap;flex-wrap:wrap;height:auto;}
+.scfw_size-chart-details-tab + .chart-container{display:-webkit-box;display:-ms-flexbox;display:flex;width:100%;-ms-flex-wrap:wrap;flex-wrap:wrap;}
 .scfw_size-chart-details-tab + .chart-container .chart-content.scfw-tab-content{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1;}
 .scfw_size-chart-details-tab + .chart-container .scfw-tab-content, .scfw_size-chart-details-tab + .chart-container .chart_note{display:none;}
 .scfw_size-chart-details-tab + .chart-container .scfw-tab-content.active-tab{display:inline-block;}

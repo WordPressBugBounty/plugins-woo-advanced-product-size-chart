@@ -48,8 +48,8 @@ if( ( !empty($chart_position) && 'popup' === $chart_position ) || $current_post_
 
 if ( isset( $size_chart_style ) && ! empty( $size_chart_style ) && 'tab_style' === $size_chart_style ) {
 	// Size chart tab title filters
-	$size_guide_tab = apply_filters( 'scfw_size_guide_tab_title', 'Size Guide' );
-	$chart_content_tab = apply_filters( 'scfw_chart_content_tab_title', 'How To Measure' );
+	$size_guide_tab = apply_filters( 'scfw_size_guide_tab_title', __( 'Size Guide', 'size-chart-for-woocommerce' ) );
+	$chart_content_tab = apply_filters( 'scfw_chart_content_tab_title', __( 'How To Measure', 'size-chart-for-woocommerce' ) );
 	?>
 	<div class="scfw_size-chart-details-tab">
 		<div class="scfw_tab_underline"></div>
@@ -61,13 +61,13 @@ if ( isset( $size_chart_style ) && ! empty( $size_chart_style ) && 'tab_style' =
 		if ( isset( $chart_table_arr ) && ! empty( $chart_table_arr ) ) {
 			$is_chart_table_empty = false;
 			?>
-			<span class="scfw_chart-tab active-tab" data-tab="scfw_size-chart-tab-1"><?php esc_html_e( $size_guide_tab, 'size-chart-for-woocommerce' ); ?></span>
+			<span class="scfw_chart-tab active-tab" data-tab="scfw_size-chart-tab-1"><?php echo esc_html( $size_guide_tab ); ?></span>
 			<?php
 		}
 
 		if ( (isset( $post_data->post_content ) && ! empty( $post_data->post_content )) || (isset( $size_chart_sub_title ) && ! empty( $size_chart_sub_title )) ) {
 			?>
-			<span class="scfw_chart-tab <?php echo $is_chart_table_empty ? esc_attr('active-tab') : ''; ?>" data-tab="scfw_size-chart-tab-2"><?php esc_html_e( $chart_content_tab, 'size-chart-for-woocommerce' ); ?></span>
+			<span class="scfw_chart-tab <?php echo $is_chart_table_empty ? esc_attr('active-tab') : ''; ?>" data-tab="scfw_size-chart-tab-2"><?php echo esc_html( $chart_content_tab ); ?></span>
 			<?php
 		}
 		?>
@@ -127,7 +127,11 @@ if ( isset( $chart_table ) && array_filter( $chart_table ) ) {
     </div>
     <?php 
     if( !empty( $chart_note ) ) {
-         echo sprintf( wp_kses_post( '<p class="chart_note"><strong>Note: </strong>%s</p>', 'size-chart-for-woocommerce' ), wp_kses_post( $chart_note ) ); 
+         echo sprintf( 
+		    wp_kses_post( '<p class="chart_note"><strong>%s</strong> %s</p>' ), 
+		    esc_html__( 'Note: ', 'size-chart-for-woocommerce' ), 
+		    wp_kses_post( $chart_note ) 
+		);
      }
 } ?>
 </div>

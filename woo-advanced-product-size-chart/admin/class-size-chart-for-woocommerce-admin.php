@@ -322,6 +322,7 @@ class SCFW_Size_Chart_For_Woocommerce_Admin {
                 'remove_product_confirm'           => __( 'Are you sure you want to remove the product from the chart?', 'size-chart-for-woocommerce' ),
                 'export_chart_confirm'             => __( 'Are you sure you want to export size chart data?', 'size-chart-for-woocommerce' ),
                 'upgradeText'                      => __( '🔒 Add New', 'size-chart-for-woocommerce' ),
+                'is_product_screen'                => ( 'product' === $screen->post_type ? 'yes' : 'no' ),
             );
             if ( scfw_fs()->is_plan( 'free', true ) ) {
                 $size_chart_localize_script_args['size_chart_plugin_menu_url'] = 'edit.php?post_type=' . $this->get_plugin_post_type_name();
@@ -1073,13 +1074,17 @@ class SCFW_Size_Chart_For_Woocommerce_Admin {
         if ( !isset( $_GET['_wpnonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'scfw_size_chart_duplicate_post_callback' ) ) {
             wp_die( esc_html__( 'Invalid request.', 'size-chart-for-woocommerce' ) );
         }
-        // Check if the user has permission to duplicate posts.
-        if ( !current_user_can( 'edit_posts' ) ) {
-            wp_die( esc_html__( 'You do not have permission to perform this action.', 'size-chart-for-woocommerce' ) );
-        }
         // Sanitize user input.
         $get_request_get = filter_input( INPUT_GET, 'post', FILTER_SANITIZE_SPECIAL_CHARS );
         $size_chart_id = ( isset( $get_request_get ) ? absint( $get_request_get ) : 0 );
+        // Ensure a valid post ID is provided.
+        if ( empty( $size_chart_id ) || get_post_status( $size_chart_id ) === false ) {
+            wp_die( esc_html__( 'Invalid post ID.', 'size-chart-for-woocommerce' ) );
+        }
+        // Check if the user has permission to duplicate posts.
+        if ( !current_user_can( 'edit_post', $size_chart_id ) ) {
+            wp_die( esc_html__( 'You do not have permission to duplicate this post.', 'size-chart-for-woocommerce' ) );
+        }
         if ( isset( $get_request_get ) && !empty( $get_request_get ) ) {
             $clone_post_id = $this->scfw_size_chart_duplicate( $size_chart_id );
             wp_redirect( admin_url( 'post.php?action=edit&post=' . $clone_post_id ) );

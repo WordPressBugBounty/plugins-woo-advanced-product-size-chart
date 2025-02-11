@@ -829,8 +829,10 @@
 	
 	// Add currunt menu class in main manu
     $(window).load(function () {
-        $('a[href="edit.php?post_type=size-chart"]').parents().addClass('current wp-has-current-submenu');
-        $('a[href="edit.php?post_type=size-chart"]').addClass('current');
+    	if ( 'no' === sizeChartScriptObject.is_product_screen ) {
+    		$('a[href="edit.php?post_type=size-chart"]').parents().addClass('current wp-has-current-submenu');
+        	$('a[href="edit.php?post_type=size-chart"]').addClass('current');
+    	}
     });
     
 	$(document).ready(function(){
@@ -1063,33 +1065,35 @@
 	    // Script for Beacon configuration
 	    var helpBeaconCookie = getCookie( 'scfw-help-beacon-hide' );
 	    if ( ! helpBeaconCookie ) {
-	        Beacon('init', 'afe1c188-3c3b-4c5f-9dbd-87329301c920');
-	        Beacon('config', {
-	            display: {
-	                style: 'icon',
-	                iconImage: 'message',
-	                zIndex: '99999'
-	            }
-	        });
+	    	if ( typeof Beacon === 'function' ) {
+	    		Beacon('init', 'afe1c188-3c3b-4c5f-9dbd-87329301c920');
+		        Beacon('config', {
+		            display: {
+		                style: 'icon',
+		                iconImage: 'message',
+		                zIndex: '99999'
+		            }
+		        });
 
-	        // Add plugin articles IDs to display in beacon
-	        Beacon('suggest', ['617fe7862b380503dfe002ac', '5e01f8222c7d3a7e9ae57d25', '5e02ef4804286364bc933852', '5e0200972c7d3a7e9ae57d4d', '5e02f15d04286364bc933854']);
+		        // Add plugin articles IDs to display in beacon
+		        Beacon('suggest', ['617fe7862b380503dfe002ac', '5e01f8222c7d3a7e9ae57d25', '5e02ef4804286364bc933852', '5e0200972c7d3a7e9ae57d4d', '5e02f15d04286364bc933854']);
 
-	        // Add custom close icon form beacon
-	        setTimeout(function() {
-	            if ( jQuery( '.hsds-beacon .BeaconFabButtonFrame' ).length > 0 ) {
-	                let newElement = document.createElement('span');
-	                newElement.classList.add('dashicons', 'dashicons-no-alt', 'dots-beacon-close');
-	                let container = document.getElementsByClassName('BeaconFabButtonFrame');
-	                container[0].appendChild( newElement );
-	            }
-	        }, 3000);
+		        // Add custom close icon form beacon
+		        setTimeout(function() {
+		            if ( jQuery( '.hsds-beacon .BeaconFabButtonFrame' ).length > 0 ) {
+		                let newElement = document.createElement('span');
+		                newElement.classList.add('dashicons', 'dashicons-no-alt', 'dots-beacon-close');
+		                let container = document.getElementsByClassName('BeaconFabButtonFrame');
+		                container[0].appendChild( newElement );
+		            }
+		        }, 3000);
 
-	        // Hide beacon
-	        jQuery(document).on('click', '.dots-beacon-close', function(){
-	            Beacon('destroy');
-	            setCookie( 'scfw-help-beacon-hide' , 'true', 24 * 60 );
-	        });
+		        // Hide beacon
+		        jQuery(document).on('click', '.dots-beacon-close', function(){
+		            Beacon('destroy');
+		            setCookie( 'scfw-help-beacon-hide' , 'true', 24 * 60 );
+		        });
+	    	}
 	    }
 
 	    // Script for updagrade to pro modal

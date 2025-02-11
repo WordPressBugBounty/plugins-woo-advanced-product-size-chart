@@ -21,7 +21,7 @@ $current_page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CH
 $get_current_screen = get_current_screen();
 $scfw_free_dashboard = ( isset( $current_page ) && 'scfw-upgrade-dashboard' === $current_page ? 'active' : '' );
 $scfw_rules_list = ( (isset( $get_current_screen ) || isset( $current_page )) && ('size-chart' === $get_current_screen->post_type && 'size-chart-setting-page' !== $current_page) ? 'active' : '' );
-$scfw_settings_menu = ( isset( $current_page ) && ('size-chart-import-export' === $current_page || 'size-chart-get-started' === $current_page || 'size-chart-setting-page' === $current_page) || !(scfw_fs()->is__premium_only() && scfw_fs()->can_use_premium_code()) && 'size-chart-get-started-account' === $current_page ? 'active' : '' );
+$scfw_settings_menu = ( isset( $current_page ) && ('size-chart-import-export' === $current_page || 'size-chart-setting-page' === $current_page) || !(scfw_fs()->is__premium_only() && scfw_fs()->can_use_premium_code()) && 'size-chart-get-started-account' === $current_page ? 'active' : '' );
 $scfw_get_started = ( isset( $current_page ) && 'size-chart-get-started' === $current_page ? 'active' : '' );
 $scfw_import_export = ( isset( $current_page ) && 'size-chart-import-export' === $current_page ? 'active' : '' );
 $scfw_global_settings = ( isset( $current_page ) && 'size-chart-setting-page' === $current_page ? 'active' : '' );

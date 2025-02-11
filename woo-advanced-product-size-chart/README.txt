@@ -1,12 +1,12 @@
 === Product Size Charts Plugin for WooCommerce ===
 Contributors: dots
 Donate link: https://www.thedotstore.com/
-Tags: product size chart, size chart, size guide, size table, product size guide
+Tags: product size chart, size chart, size guide, size table, woocommerce
 Requires at least: 4.0
 Requires PHP: 7.2
 Tested up to: 6.7.1
-Stable tag: 2.4.5
-WC tested up to: 9.6.0
+Stable tag: 2.4.6
+WC tested up to: 9.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -249,6 +249,11 @@ Automatic updates should work great for you.  As always, though, we recommend ba
 9.
 
 == Changelog ==
+= 2.4.6 =
+* [Bug Fix] Quick fixes related to the security patch
+* [Bug Fix] Minor fixes related to the size chart design
+* [Bug Fix] Minor fixes related to the help beacon
+
 = 2.4.5 =
 * [Bug Fix] Minor fixes to remove default size chart when use shortcode on product page
 * [Bug Fix] Minor fixes related to the security vulnerability
