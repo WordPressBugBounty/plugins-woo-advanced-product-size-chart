@@ -131,6 +131,7 @@ Upgrade the premium plugin version to get all the advanced features.
 
 == 📣 PREMIUM: Product size charts Plugin —  <a href ="https://bit.ly/3oguAFf" target="_blank">Try the Pro Version Today!</a> ==
 
+
 == 💁 How to’s Plugin Guide ==
 
 🔖 <a href ="https://www.thedotstore.com/create-woocommerce-size-chart/" target="_blank">How to Create a Woocommerce Product Size Chart?</a>
@@ -148,6 +149,11 @@ Upgrade the premium plugin version to get all the advanced features.
 <li><strong>Pro Plugin:</strong>  PRE-SALE Questions - <a href ="https://www.thedotstore.com/support/" target="_blank">Click here</a> or <a href ="https://docs.thedotstore.com/collection/233-advanced-product-size-charts-for-woocommerce" target="_blank">Review Help Document</a></li>
 </ul>
 
+== 🎯 Supercharge Your Store Performance ==
+
+Gain access to <strong>50 expert tips</strong> covering everything from <strong>site speed</strong> and <strong>user experience</strong> to advanced sales strategies, each with impact scores to help you prioritize what truly drives results.
+
+<a href ="https://www.thedotstore.com/?popup_id=76452&utm_source=freeplugin&utm_medium=content&utm_id=ebook1_size_chart" target="_blank">Download Free eBook</a>
 
 == 💎 EXPLORE OUR OTHER PLUGINS TO SUPERCHARGE YOUR WEBSITE ==
 
