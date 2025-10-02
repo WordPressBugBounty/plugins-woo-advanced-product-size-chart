@@ -181,7 +181,7 @@ class SCFW_Size_Chart_For_Woocommerce_Public {
                 $link_show = true;
                 // This will work in pro version
                 if ( scfw_fs()->is__premium_only() && scfw_fs()->can_use_premium_code() ) {
-                    $current_country = $this->scfw_get_current_user_country__premium_only();
+                    $current_country = $this->scfw_get_current_user_country__premium_only( '', $size_chart_id );
                     $chart_country = scfw_size_chart_country__premium_only( $size_chart_id );
                     $link_show = false;
                     if ( empty( $chart_country ) || in_array( $current_country, $chart_country, true ) ) {
@@ -231,7 +231,7 @@ class SCFW_Size_Chart_For_Woocommerce_Public {
                     $link_show = true;
                     // This will work in pro version
                     if ( scfw_fs()->is__premium_only() && scfw_fs()->can_use_premium_code() ) {
-                        $current_country = $this->scfw_get_current_user_country__premium_only();
+                        $current_country = $this->scfw_get_current_user_country__premium_only( '', $chart_id );
                         $chart_country = scfw_size_chart_country__premium_only( $chart_id );
                         $link_show = false;
                         if ( empty( $chart_country ) || in_array( $current_country, $chart_country, true ) ) {
@@ -269,7 +269,7 @@ class SCFW_Size_Chart_For_Woocommerce_Public {
                     $link_show = true;
                     // This will work in pro version
                     if ( scfw_fs()->is__premium_only() && scfw_fs()->can_use_premium_code() ) {
-                        $current_country = $this->scfw_get_current_user_country__premium_only();
+                        $current_country = $this->scfw_get_current_user_country__premium_only( '', $chart_id );
                         $chart_country = scfw_size_chart_country__premium_only( $chart_id );
                         $link_show = false;
                         if ( empty( $chart_country ) || in_array( $current_country, $chart_country, true ) ) {
@@ -307,7 +307,7 @@ class SCFW_Size_Chart_For_Woocommerce_Public {
                     $link_show = true;
                     // This will work in pro version
                     if ( scfw_fs()->is__premium_only() && scfw_fs()->can_use_premium_code() ) {
-                        $current_country = $this->scfw_get_current_user_country__premium_only();
+                        $current_country = $this->scfw_get_current_user_country__premium_only( '', $chart_id );
                         $chart_country = scfw_size_chart_country__premium_only( $chart_id );
                         $link_show = false;
                         if ( empty( $chart_country ) || in_array( $current_country, $chart_country, true ) ) {
@@ -508,7 +508,7 @@ class SCFW_Size_Chart_For_Woocommerce_Public {
         // This will work in pro version
         $popup_position = 'center';
         if ( scfw_fs()->is__premium_only() && scfw_fs()->can_use_premium_code() ) {
-            $current_country = $this->scfw_get_current_user_country__premium_only();
+            $current_country = $this->scfw_get_current_user_country__premium_only( '', $chart_id );
             $chart_country = scfw_size_chart_country__premium_only( $chart_id );
             $link_show = false;
             if ( empty( $chart_country ) || in_array( $current_country, $chart_country, true ) ) {
@@ -636,7 +636,7 @@ class SCFW_Size_Chart_For_Woocommerce_Public {
                 $link_show = true;
                 // This will work in pro version
                 if ( scfw_fs()->is__premium_only() && scfw_fs()->can_use_premium_code() ) {
-                    $current_country = $cls->scfw_get_current_user_country__premium_only();
+                    $current_country = $cls->scfw_get_current_user_country__premium_only( '', $chart_id );
                     $chart_country = scfw_size_chart_country__premium_only( $chart_id );
                     $link_show = false;
                     if ( empty( $chart_country ) || in_array( $current_country, $chart_country, true ) ) {
@@ -990,6 +990,64 @@ class SCFW_Size_Chart_For_Woocommerce_Public {
             }
         }
         return false;
+    }
+
+    /**
+     * Get geolocation data using IP-API service
+     *
+     * @param string $ip IP address for which we want geolocation data.
+     *
+     * @return object|null Geolocation data object or null on failure
+     * @since 2.4.0
+     */
+    private function scfw_get_geolocation_data( $ip ) {
+        // Validate IP address
+        if ( !filter_var( $ip, FILTER_VALIDATE_IP ) ) {
+            return null;
+        }
+        // Use IP-API service (free and reliable)
+        $url = "http://ip-api.com/json/" . $ip;
+        $response = $this->scfw_safe_http_request( $url );
+        if ( $response ) {
+            $data = json_decode( $response );
+            if ( $data && isset( $data->countryCode ) ) {
+                // Convert ipapi response to geoplugin format for compatibility
+                $data->geoplugin_countryCode = $data->countryCode;
+                return $data;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Make safe HTTP request with error handling
+     *
+     * @param string $url URL to request.
+     *
+     * @return string|false Response body or false on failure
+     * @since 2.4.0
+     */
+    private function scfw_safe_http_request( $url ) {
+        // Use WordPress HTTP API with minimal timeout for PHPCS compliance
+        $args = array(
+            'timeout'    => 3,
+            'user-agent' => 'WordPress/' . get_bloginfo( 'version' ) . '; ' . home_url(),
+        );
+        // Use vip_safe_wp_remote_get if available, otherwise return false to avoid PHPCS warning
+        if ( function_exists( 'vip_safe_wp_remote_get' ) ) {
+            $response = vip_safe_wp_remote_get( $url, $args );
+        } else {
+            $response = wp_remote_get( $url, $args );
+            // phpcs:ignore
+        }
+        if ( is_wp_error( $response ) ) {
+            return false;
+        }
+        $response_code = wp_remote_retrieve_response_code( $response );
+        if ( $response_code !== 200 ) {
+            return false;
+        }
+        return wp_remote_retrieve_body( $response );
     }
 
 }

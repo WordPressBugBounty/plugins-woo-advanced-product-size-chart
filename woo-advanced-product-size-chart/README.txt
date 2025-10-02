@@ -4,9 +4,9 @@ Donate link: https://www.thedotstore.com/
 Tags: product size chart, size chart, size guide, size table, woocommerce
 Requires at least: 4.0
 Requires PHP: 7.2
-Tested up to: 6.7.1
-Stable tag: 2.4.6
-WC tested up to: 9.6.1
+Tested up to: 6.8.3
+Stable tag: 2.4.7
+WC tested up to: 10.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -131,7 +131,6 @@ Upgrade the premium plugin version to get all the advanced features.
 
 == 📣 PREMIUM: Product size charts Plugin —  <a href ="https://bit.ly/3oguAFf" target="_blank">Try the Pro Version Today!</a> ==
 
-
 == 💁 How to’s Plugin Guide ==
 
 🔖 <a href ="https://www.thedotstore.com/create-woocommerce-size-chart/" target="_blank">How to Create a Woocommerce Product Size Chart?</a>
@@ -149,11 +148,6 @@ Upgrade the premium plugin version to get all the advanced features.
 <li><strong>Pro Plugin:</strong>  PRE-SALE Questions - <a href ="https://www.thedotstore.com/support/" target="_blank">Click here</a> or <a href ="https://docs.thedotstore.com/collection/233-advanced-product-size-charts-for-woocommerce" target="_blank">Review Help Document</a></li>
 </ul>
 
-== 🎯 Supercharge Your Store Performance ==
-
-Gain access to <strong>50 expert tips</strong> covering everything from <strong>site speed</strong> and <strong>user experience</strong> to advanced sales strategies, each with impact scores to help you prioritize what truly drives results.
-
-<a href ="https://www.thedotstore.com/?popup_id=76452&utm_source=freeplugin&utm_medium=content&utm_id=ebook1_size_chart" target="_blank">Download Free eBook</a>
 
 == 💎 EXPLORE OUR OTHER PLUGINS TO SUPERCHARGE YOUR WEBSITE ==
 
@@ -255,10 +249,15 @@ Automatic updates should work great for you.  As always, though, we recommend ba
 9.
 
 == Changelog ==
+= 2.4.7 =
+* [Bug Fix] Fixed WordPress 6.7+ Translation Loading Warning
+* [Bug Fix] Fixed Geolocation API Error Handling
+* [Enhancement] Compatible with WooCommerce 10.2.x
+* [Enhancement] Compatible with WordPress 6.8.x
+
 = 2.4.6 =
 * [Bug Fix] Quick fixes related to the security patch
 * [Bug Fix] Minor fixes related to the size chart design
-* [Bug Fix] Minor fixes related to the help beacon
 
 = 2.4.5 =
 * [Bug Fix] Minor fixes to remove default size chart when use shortcode on product page

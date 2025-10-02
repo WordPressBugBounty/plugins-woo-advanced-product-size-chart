@@ -16,7 +16,7 @@
  * Plugin Name: Product Size Charts Plugin for WooCommerce
  * Plugin URI:        https://www.thedotstore.com/woocommerce-advanced-product-size-charts/
  * Description:       Add product size charts with default template or custom size chart to any of your WooCommerce products.
- * Version:           2.4.6
+ * Version:           2.4.7
  * Author:            theDotstore
  * Author URI:        https://www.thedotstore.com/
  * License:           GPL-2.0+
@@ -25,8 +25,8 @@
  * Domain Path:       /languages
  * 
  * WC requires at least: 4.5
- * WP tested up to: 6.7.1
- * WC tested up to: 9.6.1
+ * WP tested up to: 6.8.3
+ * WC tested up to: 10.2.2
  * Requires PHP: 7.2
  * Requires at least: 4.0
  */
@@ -83,7 +83,7 @@ if ( !defined( 'SCFW_PLUGIN_URL' ) ) {
     define( 'SCFW_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 }
 if ( !defined( 'SCFW_PLUGIN_VERSION' ) ) {
-    define( 'SCFW_PLUGIN_VERSION', '2.4.6' );
+    define( 'SCFW_PLUGIN_VERSION', '2.4.7' );
 }
 if ( !defined( 'SCFW_PLUGIN_NAME' ) ) {
     define( 'SCFW_PLUGIN_NAME', 'Product Size Charts Plugin for WooCommerce' );
@@ -141,8 +141,8 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-size-chart-for-woocommerce
 if ( !function_exists( 'scfw_run_size_chart_for_woocommerce' ) ) {
     function scfw_run_size_chart_for_woocommerce() {
         $plugin_post_type_name = 'size-chart';
-        $plugin_name = esc_attr__( 'Product Size Charts', 'size-chart-for-woocommerce' );
-        $plugin_version = esc_attr__( SCFW_PLUGIN_VERSION, 'size-chart-for-woocommerce' );
+        $plugin_name = 'Product Size Charts';
+        $plugin_version = SCFW_PLUGIN_VERSION;
         $plugin = new SCFW_Size_Chart_For_Woocommerce($plugin_name, $plugin_version, $plugin_post_type_name);
         $plugin->run();
     }
@@ -174,11 +174,22 @@ if ( !function_exists( 'scfw_size_chart_initialize_plugin' ) ) {
             }
         }
         // Load the language file for translating the plugin strings
-        load_plugin_textdomain( 'size-chart-for-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+        add_action( 'init', 'scfw_load_plugin_textdomain' );
     }
 
 }
 add_action( 'plugins_loaded', 'scfw_size_chart_initialize_plugin' );
+/**
+ * Load plugin textdomain for translations.
+ *
+ * @since 1.0.0
+ */
+if ( !function_exists( 'scfw_load_plugin_textdomain' ) ) {
+    function scfw_load_plugin_textdomain() {
+        load_plugin_textdomain( 'size-chart-for-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+    }
+
+}
 /**
  * Show admin notice in case of WooCommerce plugin is missing.
  *
