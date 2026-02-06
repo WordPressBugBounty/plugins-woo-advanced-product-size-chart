@@ -24,6 +24,9 @@ $chart_popup_label = scfw_size_chart_get_popup_label_by_chart_id( $size_cart_pos
 $chart_position = scfw_size_chart_get_position_by_chart_id( $size_cart_post_id );
 $chart_table = scfw_size_chart_get_chart_table_by_chart_id( $size_cart_post_id, false );
 $table_style = scfw_size_chart_get_chart_table_style_by_chart_id( $size_cart_post_id );
+$chart_style = scfw_size_chart_style_value_by_chart_id( $size_cart_post_id );
+$size_guide_tab_title = get_post_meta( $size_cart_post_id, 'size_guide_tab_title', true );
+$chart_content_tab_title = get_post_meta( $size_cart_post_id, 'chart_content_tab_title', true );
 if ( scfw_fs()->is__premium_only() && scfw_fs()->can_use_premium_code() ) {
     $chart_color = scfw_size_chart_color_details__premium_only( $size_cart_post_id );
     $chart_border = scfw_size_chart_border_details__premium_only( $size_cart_post_id );
@@ -242,38 +245,6 @@ foreach ( glob( SCFW_PLUGIN_DIR_PATH . 'includes/chart-icons/*.svg' ) as $icon_p
             </div>
         </div>
     </div>
-    <div class="field">
-        <div class="field-header">
-            <div class="field-title">
-                <h4>
-                    <label for="size-chart-style">
-                        <?php 
-esc_html_e( 'Size Chart Style', 'size-chart-for-woocommerce' );
-?>
-                    </label>
-                </h4>
-            </div>
-            <div class="field-description">
-                <?php 
-esc_html_e( 'Display your size chart content and table in a standard view or as a tabbed view.', 'size-chart-for-woocommerce' );
-?>
-            </div>
-        </div>
-        <div class="field-item">
-            <select id="size-chart-style" name="size-chart-style">
-                <option value="standard_style" <?php 
-selected( scfw_size_chart_style_value_by_chart_id( $size_cart_post_id ), 'standard_style' );
-?>><?php 
-esc_html_e( 'Standard Chart', 'size-chart-for-woocommerce' );
-?></option>
-                <option value="tab_style" <?php 
-selected( scfw_size_chart_style_value_by_chart_id( $size_cart_post_id ), 'tab_style' );
-?>><?php 
-esc_html_e( 'Tabbed Chart', 'size-chart-for-woocommerce' );
-?></option>
-            </select>
-        </div>
-    </div>
     <?php 
 if ( scfw_fs()->is__premium_only() && scfw_fs()->can_use_premium_code() ) {
     ?>
@@ -314,6 +285,98 @@ if ( scfw_fs()->is__premium_only() && scfw_fs()->can_use_premium_code() ) {
     esc_html_e( 'Right', 'size-chart-for-woocommerce' );
     ?></option>
             </select>
+        </div>
+    </div>
+    <?php 
+}
+?>
+    <div class="field">
+        <div class="field-header">
+            <div class="field-title">
+                <h4>
+                    <label for="size-chart-style">
+                        <?php 
+esc_html_e( 'Size Chart Style', 'size-chart-for-woocommerce' );
+?>
+                    </label>
+                </h4>
+            </div>
+            <div class="field-description">
+                <?php 
+esc_html_e( 'Display your size chart content and table in a standard view or as a tabbed view.', 'size-chart-for-woocommerce' );
+?>
+            </div>
+        </div>
+        <div class="field-item">
+            <select id="size-chart-style" name="size-chart-style">
+                <option value="standard_style" <?php 
+selected( $chart_style, 'standard_style' );
+?>><?php 
+esc_html_e( 'Standard Chart', 'size-chart-for-woocommerce' );
+?></option>
+                <option value="tab_style" <?php 
+selected( $chart_style, 'tab_style' );
+?>><?php 
+esc_html_e( 'Tabbed Chart', 'size-chart-for-woocommerce' );
+?></option>
+            </select>
+        </div>
+    </div>
+    <?php 
+if ( scfw_fs()->is__premium_only() && scfw_fs()->can_use_premium_code() ) {
+    ?>
+        <div class="field tab-style-field <?php 
+    echo ( isset( $chart_style ) && 'tab_style' === $chart_style ? 'enable' : 'disable' );
+    ?>">
+        <div class="field-header">
+            <div class="field-title">
+                <h4>
+                    <label for="chart-tab-label">
+                        <?php 
+    esc_html_e( 'Size Guide Title', 'size-chart-for-woocommerce' );
+    ?>
+                    </label>
+                </h4>
+            </div>
+            <div class="field-description">
+                <?php 
+    esc_html_e( 'Add size guide title. Default it will showcase from global settings.', 'size-chart-for-woocommerce' );
+    ?>
+            </div>
+        </div>
+        <div class="field-item">
+            <input type="text" name="size_guide_tab_title" id="size_guide_tab_title" placeholder="<?php 
+    esc_attr_e( 'Size Guide', 'size-chart-for-woocommerce' );
+    ?>" value="<?php 
+    echo esc_attr( $size_guide_tab_title );
+    ?>"/>
+        </div>
+    </div>
+    <div class="field tab-style-field <?php 
+    echo ( isset( $chart_style ) && 'tab_style' === $chart_style ? 'enable' : 'disable' );
+    ?>">
+        <div class="field-header">
+            <div class="field-title">
+                <h4>
+                    <label for="chart-tab-label">
+                        <?php 
+    esc_html_e( 'How To Measure Title', 'size-chart-for-woocommerce' );
+    ?>
+                    </label>
+                </h4>
+            </div>
+            <div class="field-description">
+                <?php 
+    esc_html_e( 'Add how to measure title. Default it will showcase from global settings.', 'size-chart-for-woocommerce' );
+    ?>
+            </div>
+        </div>
+        <div class="field-item">
+            <input type="text" name="chart_content_tab_title" id="chart_content_tab_title" placeholder="<?php 
+    esc_attr_e( 'How To Measure', 'size-chart-for-woocommerce' );
+    ?>" value="<?php 
+    echo esc_attr( $chart_content_tab_title );
+    ?>"/>
         </div>
     </div>
     <div class="field">

@@ -425,6 +425,38 @@ function scfw_size_chart_get_popup_icon_by_chart_id(  $size_chart_id  ) {
 }
 
 /**
+ * Get the size guide tab title.
+ *
+ * @param int $size_chart_id size chart id.
+ *
+ * @return mixed|string a size guide tab title.
+ */
+function scfw_size_chart_get_size_guide_tab_title(  $size_chart_id  ) {
+    $size_guide_tab_title = get_post_meta( $size_chart_id, 'size_guide_tab_title', true );
+    if ( isset( $size_guide_tab_title ) && !empty( $size_guide_tab_title ) ) {
+        return $size_guide_tab_title;
+    } else {
+        return apply_filters( 'scfw_size_guide_tab_title', esc_html__( 'Size Guide', 'size-chart-for-woocommerce' ) );
+    }
+}
+
+/**
+ * Get the how to measure tab title.
+ *
+ * @param int $size_chart_id size chart id.
+ *
+ * @return mixed|string a how to measure tab title.
+ */
+function scfw_size_chart_get_chart_content_tab_title(  $size_chart_id  ) {
+    $chart_content_tab_title = get_post_meta( $size_chart_id, 'chart_content_tab_title', true );
+    if ( isset( $chart_content_tab_title ) && !empty( $chart_content_tab_title ) ) {
+        return $chart_content_tab_title;
+    } else {
+        return apply_filters( 'scfw_chart_content_tab_title', esc_html__( 'How To Measure', 'size-chart-for-woocommerce' ) );
+    }
+}
+
+/**
  * Get the chart popup type value.
  *
  * @param int $size_chart_id size chart id.

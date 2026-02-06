@@ -89,4 +89,21 @@
 	}).mouseleave(function() {
 	    $(this).closest('table').find('tr > .col-highlight').removeClass('col-highlight');
 	});
+
+    // Convert SVG image to inline SVG
+    $('#chart-button img, button.md-size-chart-btn img').each(function () {
+        var $img = $(this);
+        var imgURL = $img.attr('src');
+
+        $.get(imgURL, function (data) {
+
+            var $svg = $(data).find('svg');
+
+            // Replace image with inline SVG
+            $svg.addClass('dynamic-svg');
+            $img.replaceWith($svg);
+
+        }, 'xml');
+    });
+    
 })(jQuery);

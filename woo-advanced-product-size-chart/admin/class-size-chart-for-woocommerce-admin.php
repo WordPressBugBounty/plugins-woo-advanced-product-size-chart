@@ -727,6 +727,8 @@ class SCFW_Size_Chart_For_Woocommerce_Admin {
             $table_style = filter_input( INPUT_POST, 'table-style', FILTER_SANITIZE_SPECIAL_CHARS );
             $chart_popup_note = filter_input( INPUT_POST, 'chart-popup-note', FILTER_SANITIZE_SPECIAL_CHARS );
             $size_chart_style = filter_input( INPUT_POST, 'size-chart-style', FILTER_SANITIZE_SPECIAL_CHARS );
+            $size_guide_tab_title = filter_input( INPUT_POST, 'size_guide_tab_title', FILTER_SANITIZE_SPECIAL_CHARS );
+            $chart_content_tab_title = filter_input( INPUT_POST, 'chart_content_tab_title', FILTER_SANITIZE_SPECIAL_CHARS );
             // Sanitize the user input array values.
             $args = array(
                 'chart-categories' => array(
@@ -841,6 +843,8 @@ class SCFW_Size_Chart_For_Woocommerce_Admin {
             update_post_meta( $post_id, 'chart_country', $chart_country );
             update_post_meta( $post_id, 'popup-position', $popup_position );
             update_post_meta( $post_id, 'size-chart-style', $size_chart_style );
+            update_post_meta( $post_id, 'size_guide_tab_title', $size_guide_tab_title );
+            update_post_meta( $post_id, 'chart_content_tab_title', $chart_content_tab_title );
             update_post_meta( $post_id, 'chart-table-font-size', $chart_table_font_size );
             update_post_meta( $post_id, 'scfw_enable_table_hover', $scfw_enable_table_hover );
             update_post_meta( $post_id, 'scfw_table_hover_bg_color', $scfw_table_hover_bg_color );
@@ -1289,7 +1293,9 @@ class SCFW_Size_Chart_For_Woocommerce_Admin {
                 $assigned_product_ids = array();
                 if ( !empty( $wp_posts_query->posts ) ) {
                     foreach ( $wp_posts_query->posts as $product_id ) {
-                        $data_size_chart = json_decode( get_post_meta( $product_id, 'prod-chart', true ) );
+                        // #106666: check if data is string then convert it to array
+                        $data_size_chart = get_post_meta( $product_id, 'prod-chart', true );
+                        $data_size_chart = ( is_array( $data_size_chart ) ? $data_size_chart : json_decode( $data_size_chart, true ) );
                         $valid_product = false;
                         if ( is_array( $data_size_chart ) ) {
                             $valid_product = in_array( $post->ID, $data_size_chart, true );
@@ -1375,6 +1381,37 @@ class SCFW_Size_Chart_For_Woocommerce_Admin {
                 break;
                 wp_reset_postdata();
         }
+    }
+
+    public function scfw_add_custom_button_after_add_new_button_callback() {
+        $screen = get_current_screen();
+        // Change to your CPT slug
+        if ( empty( $screen->post_type ) || $screen->post_type !== $this->get_plugin_post_type_name() ) {
+            return;
+        }
+        global $post;
+        if ( !$post ) {
+            return;
+        }
+        // Change 'my_custom_post' to your CPT slug
+        $clone_url = wp_nonce_url( add_query_arg( array(
+            'action' => 'size_chart_duplicate_post',
+            'post'   => $post->ID,
+        ), admin_url( 'admin.php' ) ), 'scfw_size_chart_duplicate_post_callback' );
+        ?>
+        <script type="text/javascript">
+            jQuery(document).ready(function ($) {
+                $('.wrap .page-title-action').after(
+                    '<a href="<?php 
+        echo esc_url( $clone_url );
+        ?>" class="page-title-action"><?php 
+        esc_html_e( 'Duplicate Chart', 'size-chart-for-woocommerce' );
+        ?></a>'
+                );
+            });
+        </script>
+        <?php 
+        return;
     }
 
     /**
@@ -1718,7 +1755,7 @@ class SCFW_Size_Chart_For_Woocommerce_Admin {
             $clone_post_author = $current_user->ID;
             $count = ( isset( $count_clone ) && $count_clone !== 0 ? '(' . $count_clone . ')' : '' );
             $size_chart_new_post = array(
-                'post_title'   => $size_chart_title . ' - Copy' . $count,
+                'post_title'   => html_entity_decode( $size_chart_title . ' - Copy' . $count, ENT_QUOTES, 'UTF-8' ),
                 'post_status'  => 'draft',
                 'post_type'    => $this->get_plugin_post_type_name(),
                 'post_content' => $size_chart_content,

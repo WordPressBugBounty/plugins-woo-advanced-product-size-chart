@@ -17,8 +17,9 @@ table#size-chart tr th,table#size-chart tr td{text-align:center;word-wrap:break-
 .chart-content-list>ul{margin-left:20px}
 #chart-button{border-bottom:medium none;box-shadow:none;text-decoration:none;outline:none;}
 .button-wrapper{clear:both;float:left;margin-bottom:15px;width:100%}
-.button-wrapper .md-size-chart-btn .dashicons {margin-right:8px;vertical-align: text-bottom;}
-.button-wrapper .md-size-chart-btn .dashicons img{width:20px;height:20px;margin:0;display:inline-block;vertical-align:bottom;}
+.button-wrapper .md-size-chart-btn .dashicons {width:25px;height:25px;margin-right:8px;}
+.button-wrapper .md-size-chart-btn .dashicons img{width:25px;height:25px;margin:0;display:inline-block;}
+.button-wrapper .md-size-chart-btn .dynamic-svg{width:25px;height:25px;margin:0;display:inline-block;}
 .remodal{margin-top:25px}
 @media only screen and (max-width:500px){table#size-chart tr th{font-size:11px!important}table#size-chart tr td{font-size:10px!important}}
 #size-chart tr:nth-child(2n+1){border-bottom:1px solid #eee}

@@ -152,6 +152,7 @@ class SCFW_Size_Chart_For_Woocommerce {
         $this->loader->add_action( 'admin_menu', $plugin_admin, 'scfw_size_chart_welcome_page_screen_and_menu_callback' );
         $this->loader->add_action( 'admin_head', $plugin_admin, 'scfw_welcome_screen_remove_menus_callback' );
         $this->loader->add_action( 'admin_head', $plugin_admin, 'scfw_size_chart_custom_styles_and_scripts' );
+        $this->loader->add_action( 'admin_head-post.php', $plugin_admin, 'scfw_add_custom_button_after_add_new_button_callback' );
         $this->loader->add_action( 'admin_footer', $plugin_admin, 'scfw_size_chart_preview_dialog_box_callback' );
         $this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'scfw_size_chart_add_meta_box_callback' );
         $this->loader->add_action( 'save_post', $plugin_admin, 'scfw_size_chart_product_and_size_chart_save_callback' );

@@ -1,12 +1,9 @@
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
- "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
- preserveAspectRatio="xMidYMid meet">
+ preserveAspectRatio="xMidYMid meet" class="dynamic-svg">
 
 <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-fill="#000000" stroke="none">
+fill="currentColor" stroke="none">
 <path d="M1980 4824 c-106 -13 -280 -47 -359 -69 -83 -23 -105 -25 -304 -25
 -206 0 -215 -1 -243 -22 -49 -38 -858 -744 -873 -762 -8 -9 -14 -29 -14 -44 1
 -30 432 -789 460 -809 34 -26 68 -12 245 97 99 61 181 110 183 110 3 0 6 -449

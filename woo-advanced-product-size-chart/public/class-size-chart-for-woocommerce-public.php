@@ -97,7 +97,6 @@ class SCFW_Size_Chart_For_Woocommerce_Public {
      * @since 1.0.0
      */
     public function scfw_enqueue_styles_scripts_callback() {
-        $suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min' );
         /**
          * This function is provided for demonstration purposes only.
          *
@@ -136,7 +135,7 @@ class SCFW_Size_Chart_For_Woocommerce_Public {
          */
         wp_register_script(
             $this->get_plugin_dash_name(),
-            plugin_dir_url( __FILE__ ) . 'js/size-chart-for-woocommerce-public' . $suffix . '.js',
+            plugin_dir_url( __FILE__ ) . 'js/size-chart-for-woocommerce-public.js',
             array('jquery'),
             $this->version,
             true
@@ -157,7 +156,7 @@ class SCFW_Size_Chart_For_Woocommerce_Public {
         global $post;
         $prod_id = scfw_size_chart_get_product( $post->ID );
         $prod_id = ( is_array( $prod_id ) ? $prod_id : [$prod_id] );
-        if ( isset( $prod_id ) && is_array( $prod_id ) && !empty( $prod_id ) ) {
+        if ( is_array( $prod_id ) && !empty( $prod_id ) ) {
             $i = 50;
             $i = apply_filters( 'scfw_tab_priority_setting', $i );
             foreach ( $prod_id as $prod_val ) {
@@ -176,7 +175,8 @@ class SCFW_Size_Chart_For_Woocommerce_Public {
                     }
                 }
                 if ( !$size_chart_id ) {
-                    return $tabs;
+                    continue;
+                    // as we need to continue the loop to check the next size chart to show by category, tag or attribute
                 }
                 $link_show = true;
                 // This will work in pro version
@@ -189,7 +189,8 @@ class SCFW_Size_Chart_For_Woocommerce_Public {
                     }
                 }
                 if ( !$link_show ) {
-                    return $tabs;
+                    continue;
+                    // as we need to continue the loop to check the next size chart to show by country
                 }
                 $chart_label = scfw_size_chart_get_label_by_chart_id( $size_chart_id );
                 if ( 'tab' === $chart_position ) {
@@ -239,7 +240,8 @@ class SCFW_Size_Chart_For_Woocommerce_Public {
                         }
                     }
                     if ( !$chart_ids || !$link_show ) {
-                        return $tabs;
+                        continue;
+                        // as we need to continue the loop to check the next size chart
                     }
                     $chart_position = scfw_size_chart_get_position_by_chart_id( $chart_id );
                     $chart_label = scfw_size_chart_get_label_by_chart_id( $chart_id );
@@ -277,7 +279,8 @@ class SCFW_Size_Chart_For_Woocommerce_Public {
                         }
                     }
                     if ( !$size_chart_id || !$link_show ) {
-                        return $tabs;
+                        continue;
+                        // as we need to continue the loop to check the next size chart
                     }
                     $chart_position = scfw_size_chart_get_position_by_chart_id( $chart_id );
                     $chart_label = scfw_size_chart_get_label_by_chart_id( $chart_id );
@@ -315,7 +318,8 @@ class SCFW_Size_Chart_For_Woocommerce_Public {
                         }
                     }
                     if ( !$chart_attr_id || !$link_show ) {
-                        return $tabs;
+                        continue;
+                        // as we need to continue the loop to check the next size chart
                     }
                     $chart_position = scfw_size_chart_get_position_by_chart_id( $chart_id );
                     $chart_label = scfw_size_chart_get_label_by_chart_id( $chart_id );
@@ -542,7 +546,12 @@ class SCFW_Size_Chart_For_Woocommerce_Public {
             }
             $chart_popup_icon = scfw_size_chart_get_popup_icon_by_chart_id( $chart_id );
             if ( !empty( $chart_popup_icon ) ) {
-                $popup_label = sprintf( __( '<span class="dashicons"><img src="%1$s" alt="%2$s" /></span>', 'size-chart-for-woocommerce' ), esc_url( SCFW_PLUGIN_URL . 'includes/chart-icons/' . $chart_popup_icon . '.svg' ), $chart_popup_icon ) . $popup_label;
+                $popup_label = sprintf(
+                    __( '<span class="dashicons"><img src="%1$s" alt="%2$s" /></span>%3$s', 'size-chart-for-woocommerce' ),
+                    esc_url( SCFW_PLUGIN_URL . 'includes/chart-icons/' . $chart_popup_icon . '.svg' ),
+                    $chart_popup_icon,
+                    $popup_label
+                );
             }
             ?>
             <div class="scfw-size-chart-main md-size-chart-modal-main">

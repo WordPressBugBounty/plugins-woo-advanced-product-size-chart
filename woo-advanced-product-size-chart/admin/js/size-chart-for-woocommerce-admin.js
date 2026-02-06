@@ -853,6 +853,18 @@
 	    }
 	    scfw_size_chart_position_options();
 
+        function scfw_size_chart_tyle_options(){
+            $('select#size-chart-style').on('change', function(){
+                var optionSelected = $(this).val();
+                if( 'tab_style' === optionSelected ){
+                    $('.tab-style-field').css('display', 'flex');
+                } else {
+                    $('.tab-style-field').hide();
+                }
+            });
+        }
+        scfw_size_chart_tyle_options();
+
         //Default icon JS
         $('input[name="default-icons"]').change(function(){
             var value = $(this).val();

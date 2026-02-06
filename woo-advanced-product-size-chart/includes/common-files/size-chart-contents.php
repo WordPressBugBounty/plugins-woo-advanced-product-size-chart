@@ -48,8 +48,8 @@ if( ( !empty($chart_position) && 'popup' === $chart_position ) || $current_post_
 
 if ( isset( $size_chart_style ) && ! empty( $size_chart_style ) && 'tab_style' === $size_chart_style ) {
 	// Size chart tab title filters
-	$size_guide_tab = apply_filters( 'scfw_size_guide_tab_title', __( 'Size Guide', 'size-chart-for-woocommerce' ) );
-	$chart_content_tab = apply_filters( 'scfw_chart_content_tab_title', __( 'How To Measure', 'size-chart-for-woocommerce' ) );
+	$size_guide_tab = scfw_size_chart_get_size_guide_tab_title( $chart_id );
+	$chart_content_tab = scfw_size_chart_get_chart_content_tab_title( $chart_id );
 	?>
 	<div class="scfw_size-chart-details-tab">
 		<div class="scfw_tab_underline"></div>

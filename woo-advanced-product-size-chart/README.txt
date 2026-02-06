@@ -2,11 +2,11 @@
 Contributors: dots
 Donate link: https://www.thedotstore.com/
 Tags: product size chart, size chart, size guide, size table, woocommerce
-Requires at least: 4.0
+Requires at least: 5.0
 Requires PHP: 7.2
-Tested up to: 6.8.3
-Stable tag: 2.4.7
-WC tested up to: 10.2.2
+Tested up to: 6.9
+Stable tag: 2.4.8
+WC tested up to: 10.4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -249,6 +249,13 @@ Automatic updates should work great for you.  As always, though, we recommend ba
 9.
 
 == Changelog ==
+= 2.4.8 [05-Feb-2026] =
+* [Enhancement] Allow the clone/duplicate the current size chart within edit screen
+* [Enhancement] Other minor improvement
+* [Enhancement] Update Freemius SDK v2.13.0
+* [Enhancement] Compatible with WooCommerce 10.4.3
+* [Enhancement] Compatible with WordPress 6.9
+
 = 2.4.7 =
 * [Bug Fix] Fixed WordPress 6.7+ Translation Loading Warning
 * [Bug Fix] Fixed Geolocation API Error Handling
